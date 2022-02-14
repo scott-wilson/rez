@@ -1,4 +1,5 @@
 use super::utils::{Common, VersionError};
+use pyo3::prelude::*;
 use std::cmp::Eq;
 use std::str::FromStr;
 use std::string::ToString;
@@ -94,6 +95,7 @@ impl NumericToken {
 }
 
 #[derive(Debug)]
+#[pyclass(name = "Version", module = "rustrez.vendor.version.version")]
 pub struct Version {}
 
 #[derive(Debug)]
