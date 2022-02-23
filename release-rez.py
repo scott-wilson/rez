@@ -1,16 +1,5 @@
-# Copyright Contributors to the Rez project
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# SPDX-License-Identifier: Apache-2.0
+# Copyright Contributors to the Rez Project
 
 
 """
@@ -22,7 +11,6 @@ from __future__ import print_function
 import argparse
 import os
 from datetime import date
-from getpass import getpass
 from pipes import quote
 import subprocess
 import sys
@@ -40,8 +28,18 @@ sys.path.insert(0, src_path)
 from rez.utils._version import _rez_version
 
 
-github_baseurl = "github.com/repos/nerdvegas/rez"
-github_baseurl2 = "github.com/nerdvegas/rez"
+def get_github_repo_owner():
+    out = subprocess.check_output(["git", "remote", "-v"])
+
+    # eg git@github.com:jbloggs/rez.git, https://github.com/jbloggs/rez.git
+    remote_url = out.split()[1]
+    parts = remote_url.replace('/', ' ').replace(':', ' ').split()
+    return parts[-2]
+
+
+_repo_owner = get_github_repo_owner()
+github_baseurl = "github.com/repos/%s/rez" % _repo_owner
+github_baseurl2 = "github.com/%s/rez" % _repo_owner
 verbose = False
 
 # https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line
