@@ -14,45 +14,44 @@ pub mod rez;
 /// # Examples:
 ///
 /// ```python
-/// import rustrez
-/// rustrez.vendor.version.version.Version()
+/// import _rez
+/// _rez.vendor.version.version.Version()
 /// ```
 ///
 /// or
 ///
 /// ```python
-/// from rustrez.vendor.version.version import Version
+/// from _rez.vendor.version.version import Version
 /// Version()
 /// ```
 ///
 #[pymodule]
-fn rustrez(py: Python, module: &PyModule) -> PyResult<()> {
-    // Setup rustrez.vendor namespace
-    let vendor_subpackage = PyModule::new(py, "rustrez.vendor")?;
+fn _rez(py: Python, module: &PyModule) -> PyResult<()> {
+    // Setup _rez.vendor namespace
+    let vendor_subpackage = PyModule::new(py, "_rez.vendor")?;
     py_run!(
         py,
         vendor_subpackage,
-        "import sys; sys.modules['rustrez.vendor'] = vendor_subpackage"
+        "import sys; sys.modules['_rez.vendor'] = vendor_subpackage"
     );
     module.add_submodule(vendor_subpackage)?;
 
-    // Setup rustrez.vendor.version namespace
-    let version_subpackage = PyModule::new(py, "rustrez.vendor.version")?;
+    // Setup _rez.vendor.version namespace
+    let version_subpackage = PyModule::new(py, "_rez.vendor.version")?;
     py_run!(
         py,
         version_subpackage,
-        "import sys; sys.modules['rustrez.vendor.version'] = version_subpackage"
+        "import sys; sys.modules['_rez.vendor.version'] = version_subpackage"
     );
     module.add_submodule(version_subpackage)?;
 
-    // Setup rustrez.vendor.version.version namespace
-    let version_submodule = PyModule::new(py, "rustrez.vendor.version.version")?;
+    // Setup _rez.vendor.version.version namespace
+    let version_submodule = PyModule::new(py, "_rez.vendor.version.version")?;
     py_run!(
         py,
         version_submodule,
-        "import sys; sys.modules['rustrez.vendor.version.version'] = version_submodule"
+        "import sys; sys.modules['_rez.vendor.version.version'] = version_submodule"
     );
-    version_submodule.add_class::<rez::version::version::Version>()?;
     module.add_submodule(version_submodule)?;
     Ok(())
 }

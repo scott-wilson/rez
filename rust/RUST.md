@@ -57,9 +57,9 @@ You can see if it worked by running the following:
 
 ```bash
 $ python
->> from rustrez.vendor.version.version import Version
+>> from _rez.vendor.version.version import Version
 >> Version
-<class 'rustrez.vendor.version.version.Version'>
+<class '_rez.vendor.version.version.Version'>
 ```
 
 For other Maturin commands check out their [docs](https://github.com/PyO3/maturin#usage).
