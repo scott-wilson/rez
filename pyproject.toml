@@ -1,7 +1,7 @@
 [build-system]
 requires = ["setuptools", "wheel"]
 build-backend = "backend"
-backend-path = ["src.build_utils.rust_build"]
+backend-path = ["src/build_utils"]
 
 [project]
 name = "rez"
