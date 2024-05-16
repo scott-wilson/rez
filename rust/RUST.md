@@ -56,8 +56,10 @@ maturin develop
 You can see if it worked by running the following:
 
 ```bash
-$ python -c "from rez import rez; rez.foo()"
-Hello from Rust
+$ python
+>> from _rez.vendor.version.version import Version
+>> Version
+<class '_rez.vendor.version.version.Version'>
 ```
 
 For other Maturin commands check out their [docs](https://github.com/PyO3/maturin#usage).
